@@ -6,9 +6,9 @@ import * as photo from './controllers/photo'
 const server = express()
 
 server.use(express.json())
+
 server.use(
-  // TODO change to dist @ prod
-  express.static(path.join(__dirname, '../../client/src'))
+  express.static(path.join(__dirname, '../../client/dist/'))
 )
 
 server.get('/photo', photo.index)
