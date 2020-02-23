@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/dist/index.ts",
     "dev": "nodemon",
+    "dev:client": "parcel client/src/index.html",
     "build": "npm run build:client && npm run build:server",
     "build:server": "tsc",
     "build:client": "parcel build client/src/index.html --out-dir client/dist/ --public-url ./ --no-source-maps"
