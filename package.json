@@ -10,6 +10,9 @@
     "build:server": "tsc",
     "build:client": "parcel build client/src/index.html --out-dir client/dist/ --public-url ./ --no-source-maps"
   },
+  "browserslist": [
+    "last 20 Chrome versions"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patricklatorre/eggsplash.git"
