@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 // @ts-ignore
-// fetch api polyfill
+// Fetch API polyfill
 global.fetch = fetch
 
 import server from './server'
