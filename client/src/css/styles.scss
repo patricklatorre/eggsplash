@@ -1,0 +1,33 @@
+$base-color: #EFF7F6;
+$accent-color: #7641C6;
+$text-gray-100: #223;
+$red: #FF495C;
+$green: #3DDC97;
+$blue: #256EFF;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $base-color;
+}
+
+nav#navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  & > div {
+    width: 100%;
+    padding: 1.1rem 0;
+  }
+
+  & h2 {
+    width: 100%;
+    font-family: 'Libre Baskerville', Arial, Helvetica, sans-serif;
+    color: $text-gray-100;
+    text-align: center;
+  }
+}
