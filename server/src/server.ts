@@ -1,12 +1,13 @@
 import path from 'path'
 import express from 'express'
+import cors from 'cors'
 
 import * as photo from './controllers/photo'
 
 const server = express()
 
+server.use(cors())
 server.use(express.json())
-
 server.use(
   express.static(path.join(__dirname, '../../client/dist/'))
 )
