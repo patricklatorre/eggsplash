@@ -30,6 +30,11 @@ async function toggleLoading() {
   document.getElementById('loading-widget').classList.toggle('hidden')
 }
 
+const appState: IAppState = {
+  lastPageFetch: 0,
+  lastPageRender: 0
+}
+
 photos.getImages(1)
   .then(data => {
     toggleLoading()
