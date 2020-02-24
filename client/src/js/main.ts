@@ -16,3 +16,7 @@ function createImg(data: any) {
   el.setAttribute('alt', data.alt || 'eggs')
   return el
 }
+
+async function insertElem(el: Node) {
+  document.getElementById('img-list').appendChild(el)
+}
