@@ -21,8 +21,13 @@ async function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
 
+async function toggleLoading() {
+  document.getElementById('loading-widget').classList.toggle('hidden')
+}
+
 photos.getImages(1)
   .then(data => {
+    toggleLoading()
     data.results.map((img: ImageData) => {
       const imgElem = createImg({
         src: img.urls.small,
