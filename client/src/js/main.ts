@@ -20,3 +20,19 @@ function createImg(data: any) {
 async function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
+
+photos.getImages(1)
+  .then(data => {
+    data.results.map((img: ImageData) => {
+      const imgElem = createImg({
+        src: img.urls.small,
+        width: img.width,
+        height: '400',
+        alt: img.alt_description,
+      })
+      insertElem(imgElem)
+    })
+  })
+  .catch(err => {
+    console.log('An error occured while fetching photos: ' + err)
+  })
