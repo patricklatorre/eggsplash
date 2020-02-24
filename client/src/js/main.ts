@@ -9,7 +9,8 @@ interface IImageData {
 }
 
 interface IAppState {
-  lastPage: number
+  lastPageFetch: number,
+  lastPageRender: number
 }
 
 function createImg(data: any) {
