@@ -16,13 +16,15 @@ body {
 }
 
 nav#navbar {
-  width: 100%;
   position: fixed;
   top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: $base-color;
 
   & > div {
     width: 100%;
-    padding: 1.1rem 0;
+    padding: 2rem 0;
   }
 
   & h2 {
