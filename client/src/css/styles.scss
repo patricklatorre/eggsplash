@@ -1,6 +1,7 @@
 $base-color: #EFF7F6;
 $accent-color: #7641C6;
 $text-gray-100: #223;
+$text-gray-800: #778;
 $red: #FF495C;
 $green: #3DDC97;
 $blue: #256EFF;
@@ -13,7 +14,8 @@ $blue: #256EFF;
 body {
   min-height: 100%;
   background-color: $base-color;
-}
+  font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+} 
 
 nav#navbar {
   position: fixed;
@@ -61,6 +63,17 @@ img {
   margin: 0;
 }
 
+h4#loading-widget {
+  width: 100%;
+  padding-top: 6rem;
+  color: $text-gray-800;
+  text-align: center;
+  font-size: 2em;
+}
+
+.hidden {
+  display: none;
+}
 
 /* Tablet and bigger */
 @media only screen and (min-width: 750px) {
