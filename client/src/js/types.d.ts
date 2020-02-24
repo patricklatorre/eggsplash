@@ -6,6 +6,6 @@ export interface IImageData {
 }
 
 export interface IAppState {
-  lastPageFetch: number,
+  lastPage: number,
   imgCache: IImageData[]
 }
