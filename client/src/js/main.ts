@@ -1,7 +1,7 @@
 import * as _ from './util'
 import * as photos from './photos'
 
-interface ImageData {
+interface IImageData {
   urls: string;
   width: string;
   height: string;
@@ -28,7 +28,7 @@ async function toggleLoading() {
 photos.getImages(1)
   .then(data => {
     toggleLoading()
-    data.results.map((img: ImageData) => {
+    data.results.forEach((img: IImageData) => {
       const imgElem = createImg({
         src: img.urls.small,
         width: img.width,
