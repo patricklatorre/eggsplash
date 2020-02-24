@@ -10,7 +10,7 @@ interface IImageData {
 
 interface IAppState {
   lastPageFetch: number,
-  lastPageRender: number
+  imgCache: IImageData[]
 }
 
 function createImg(data: any) {
@@ -32,7 +32,7 @@ async function toggleLoading() {
 
 const appState: IAppState = {
   lastPageFetch: 0,
-  lastPageRender: 0
+  imgCache: []
 }
 
 photos.getImages(1)
