@@ -13,6 +13,15 @@ const validatePage = async (page: number) => {
     return null
 }
 
+export const toImageData = (img: any) => {
+  return {
+    src: img.urls.small,
+    width: img.width,
+    height: '400',
+    alt: img.alt_description,
+  }
+}
+
 export const index = async (req: Request, res: Response) => {
   const page = await validatePage(req.query.page as number) || 1
   const picsPerPage = 12
@@ -20,7 +29,8 @@ export const index = async (req: Request, res: Response) => {
   unsplash.search.photos('eggs', page, picsPerPage)
     .then(toJson)
     .then(json => {
-      res.json(json)
+      const results = json.results.map((raw: any) => toImageData(raw))
+      res.json({ results })
     })
     .catch(err => {
       // TODO Implement unsplash error
