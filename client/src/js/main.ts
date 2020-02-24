@@ -1,42 +1,34 @@
-import { IAppState, IImageData } from './types'
+import { IAppState, IImageData } from './types';
 import * as _ from './util'
 import * as photos from './photos'
 
-function createImg(data: any) {
-  const el = document.createElement('img')
-  el.setAttribute('src', data.src || '#')
-  el.setAttribute('width', data.width as string || '400')
-  el.setAttribute('height', data.height as string || '400')
-  el.setAttribute('alt', data.alt || 'eggs')
-  return el
-}
-
-async function insertElem(el: Node) {
+function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
 
-async function toggleLoading() {
+function toggleLoading() {
   document.getElementById('loading-widget').classList.toggle('hidden')
 }
 
-const appState: IAppState = {
-  lastPageFetch: 0,
+async function getNextImages(state: IAppState) {
+  toggleLoading()
+  const nextPage = state.lastPage + 1
+  photos.getImages(nextPage)
+    .then(data => {
+      toggleLoading()
+      state.lastPage = nextPage
+      data.results
+        .map((imgData: IImageData) => photos.toElement(imgData))
+        .forEach((imgElem: Node) => insertElem(imgElem))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+const state: IAppState = {
+  lastPage: 0,
   imgCache: []
 }
 
-photos.getImages(1)
-  .then(data => {
-    toggleLoading()
-    data.results.forEach((img: IImageData) => {
-      const imgElem = createImg({
-        src: img.urls.small,
-        width: img.width,
-        height: '400',
-        alt: img.alt_description,
-      })
-      insertElem(imgElem)
-    })
-  })
-  .catch(err => {
-    console.log('An error occured while fetching photos: ' + err)
-  })
+getNextImages(state)
