@@ -1,17 +1,6 @@
+import { IAppState, IImageData } from './types'
 import * as _ from './util'
 import * as photos from './photos'
-
-interface IImageData {
-  urls: string;
-  width: string;
-  height: string;
-  alt_description: string
-}
-
-interface IAppState {
-  lastPageFetch: number,
-  imgCache: IImageData[]
-}
 
 function createImg(data: any) {
   const el = document.createElement('img')
