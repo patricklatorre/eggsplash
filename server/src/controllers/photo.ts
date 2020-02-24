@@ -15,7 +15,7 @@ const validatePage = async (page: number) => {
 
 export const index = async (req: Request, res: Response) => {
   const page = await validatePage(req.query.page as number) || 1
-  const picsPerPage = 3
+  const picsPerPage = 12
 
   unsplash.search.photos('eggs', page, picsPerPage)
     .then(toJson)
