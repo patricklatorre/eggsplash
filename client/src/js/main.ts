@@ -8,3 +8,11 @@ interface ImageData {
   alt_description: string
 }
 
+function createImg(data: any) {
+  const el = document.createElement('img')
+  el.setAttribute('src', data.src || '#')
+  el.setAttribute('width', data.width as string || '400')
+  el.setAttribute('height', data.height as string || '400')
+  el.setAttribute('alt', data.alt || 'eggs')
+  return el
+}
