@@ -8,6 +8,10 @@ interface IImageData {
   alt_description: string
 }
 
+interface IAppState {
+  lastPage: number
+}
+
 function createImg(data: any) {
   const el = document.createElement('img')
   el.setAttribute('src', data.src || '#')
