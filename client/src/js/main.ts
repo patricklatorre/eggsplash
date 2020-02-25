@@ -39,9 +39,10 @@ async function renderFromCache(state: IAppState) {
   toggleLoading()
 }
 
-function loadMore() {
+async function loadMore() {
+  /* TODO refactor to vanilla js */
   if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-    renderFromCache(state)
+    await renderFromCache(state)
     cacheNextImages(state)
   }
 }
