@@ -39,9 +39,14 @@ async function renderFromCache(state: IAppState) {
   toggleLoading()
 }
 
+function loadMore() {
+  if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+    renderFromCache(state)
+    cacheNextImages(state)
+  }
 }
 
-getNextImages(state)
+/**
 
 // Init state and start app
 const state: IAppState = { lastPage: 0, imgCache: [] }
