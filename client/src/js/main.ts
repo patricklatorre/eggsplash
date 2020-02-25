@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import * as _ from './util'
+import { IAppState, IImageData } from './types'
 import * as photos from './photos'
 
 function insertElem(el: Node) {
