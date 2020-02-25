@@ -1,10 +1,8 @@
 import Unsplash, { toJson } from 'unsplash-js'
-
-import config from '../config'
 import { Request, Response } from 'express'
 
 // Initialize unsplash lib
-const unsplash = new Unsplash({ accessKey: config.unsplash.accessKey })
+const unsplash = new Unsplash({ accessKey: process.env.UNSPLASH_ACCESS_KEY })
 
 const validatePage = async (page: number) => {
   if (page && !isNaN(page) && page > 0)
