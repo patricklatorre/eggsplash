@@ -16,16 +16,14 @@ function toggleLoading() {
   document.getElementById('loading-widget').classList.toggle('hidden')
 }
 
-async function getNextImages(state: IAppState) {
-  toggleLoading()
+async function cacheNextImages(state: IAppState, showLoading?: boolean) {
+  if (showLoading) toggleLoading()
   const nextPage = state.lastPage + 1
-  photos.getImages(nextPage)
+  await photos.getImages(nextPage)
     .then(data => {
-      toggleLoading()
+      if (showLoading) toggleLoading()
       state.lastPage = nextPage
-      data.results
-        .map((imgData: IImageData) => photos.toElement(imgData))
-        .forEach((imgElem: Node) => insertElem(imgElem))
+      state.imgCache = state.imgCache.concat(data.results)
     })
     .catch(err => {
       console.log(err)
