@@ -1,43 +1,60 @@
-import * as _ from './util'
+import debounce from 'lodash.debounce'
+import { IAppState, IImageData } from './types'
 import * as photos from './photos'
 
-interface ImageData {
-  urls: string;
-  width: string;
-  height: string;
-  alt_description: string
+async function initialize(state: IAppState) {
+  await cacheNextImages(state, true)
+  await renderFromCache(state)
+  cacheNextImages(state)
 }
 
-function createImg(data: any) {
-  const el = document.createElement('img')
-  el.setAttribute('src', data.src || '#')
-  el.setAttribute('width', data.width as string || '400')
-  el.setAttribute('height', data.height as string || '400')
-  el.setAttribute('alt', data.alt || 'eggs')
-  return el
-}
-
-async function insertElem(el: Node) {
+function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
 
-async function toggleLoading() {
+function toggleLoading() {
   document.getElementById('loading-widget').classList.toggle('hidden')
 }
 
-photos.getImages(1)
-  .then(data => {
-    toggleLoading()
-    data.results.map((img: ImageData) => {
-      const imgElem = createImg({
-        src: img.urls.small,
-        width: img.width,
-        height: '400',
-        alt: img.alt_description,
-      })
-      insertElem(imgElem)
+async function cacheNextImages(state: IAppState, showLoading?: boolean) {
+  if (showLoading) toggleLoading()
+  const nextPage = state.lastPage + 1
+  await photos.getImages(nextPage)
+    .then(data => {
+      if (showLoading) toggleLoading()
+      state.lastPage = nextPage
+      state.imgCache = state.imgCache.concat(data.results)
     })
-  })
-  .catch(err => {
-    console.log('An error occured while fetching photos: ' + err)
-  })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+async function renderFromCache(state: IAppState) {
+  toggleLoading()
+  state.imgCache
+    .splice(0, 12)
+    .map((imgData: IImageData) => photos.toElement(imgData))
+    .forEach((imgElem: Node) => insertElem(imgElem))
+  toggleLoading()
+}
+
+async function loadMore() {
+  /* TODO refactor to vanilla js */
+  if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+    await renderFromCache(state)
+    cacheNextImages(state)
+  }
+}
+
+/**
+ * Async wrapper
+ */
+async function main() {
+  initialize(state)
+  window.addEventListener('scroll', debounce(loadMore, 250, { trailing: true }))
+}
+
+// Init state and start app
+const state: IAppState = { lastPage: 0, imgCache: [] }
+main()
