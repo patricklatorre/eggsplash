@@ -47,6 +47,13 @@ function loadMore() {
 }
 
 /**
+ * Async wrapper
+ */
+async function main() {
+  initialize(state)
+  window.addEventListener('scroll', debounce(loadMore, 250, { trailing: true }))
+}
 
 // Init state and start app
 const state: IAppState = { lastPage: 0, imgCache: [] }
+main()
