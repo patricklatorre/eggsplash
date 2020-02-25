@@ -2,6 +2,12 @@ import debounce from 'lodash.debounce'
 import { IAppState, IImageData } from './types'
 import * as photos from './photos'
 
+async function initialize(state: IAppState) {
+  await cacheNextImages(state, true)
+  await renderFromCache(state)
+  cacheNextImages(state)
+}
+
 function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
