@@ -32,3 +32,6 @@ const state: IAppState = {
 }
 
 getNextImages(state)
+
+// Init state and start app
+const state: IAppState = { lastPage: 0, imgCache: [] }
