@@ -1,7 +1,8 @@
 import { IImageData } from './types';
+import config from './config'
 
 export const getImages = async (page: number) => {
-  const url = `http://localhost:9090/photo?page=${page}`
+  const url = `${config.restEndpoint}?page=${page}`
   const response = await fetch(url, {
     cache: 'no-cache',
     headers: {
