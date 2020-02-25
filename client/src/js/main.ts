@@ -32,9 +32,15 @@ async function getNextImages(state: IAppState) {
     })
 }
 
-const state: IAppState = {
-  lastPage: 0,
-  imgCache: []
+async function renderFromCache(state: IAppState) {
+  toggleLoading()
+  state.imgCache
+    .splice(0, 12)
+    .map((imgData: IImageData) => photos.toElement(imgData))
+    .forEach((imgElem: Node) => insertElem(imgElem))
+  toggleLoading()
+}
+
 }
 
 getNextImages(state)
