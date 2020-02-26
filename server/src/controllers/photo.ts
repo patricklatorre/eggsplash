@@ -31,6 +31,7 @@ export const index = async (req: Request, res: Response) => {
       res.json({ results })
     })
     .catch(err => {
-      // TODO Implement unsplash error
+      console.error(err)
+      res.json({ results: [] })
     })
 }
