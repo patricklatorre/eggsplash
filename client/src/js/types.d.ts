@@ -1,5 +1,5 @@
 export interface IImageData {
-  urls: string;
+  src: string;
   width: string;
   height: string;
   alt_description: string
