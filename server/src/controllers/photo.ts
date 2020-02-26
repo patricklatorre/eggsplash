@@ -1,5 +1,6 @@
 import Unsplash, { toJson } from 'unsplash-js'
 import { Request, Response } from 'express'
+import { IImageData } from 'types';
 
 // Initialize unsplash lib
 const unsplash = new Unsplash({ accessKey: process.env.UNSPLASH_ACCESS_KEY })
@@ -11,12 +12,12 @@ const validatePage = async (page: number) => {
     return null
 }
 
-export const toImageData = (img: any) => {
+export const toImageData = (img: any): IImageData => {
   return {
     src: img.urls.small,
     width: img.width,
     height: '400',
-    alt: img.alt_description,
+    alt_description: img.alt_description,
   }
 }
 
