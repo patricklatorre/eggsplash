@@ -20,15 +20,15 @@ export const toElement = (data: any) => {
   el.setAttribute('src', data.src || '#')
   el.setAttribute('width', data.width as string || '400')
   el.setAttribute('height', data.height as string || '400')
-  el.setAttribute('alt', data.alt || 'eggs')
+  el.setAttribute('alt_description', data.alt || 'eggs')
   return el
 }
 
-export const toImageData = (img: any) => {
+export const toImageData = (img: any): IImageData => {
   return {
-    src: img.urls.small,
-    width: img.width,
+    src: img.urls.small as string,
+    width: img.width as string,
     height: '400',
-    alt: img.alt_description,
+    alt_description: img.alt_description as string,
   }
 }

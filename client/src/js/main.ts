@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import { IAppState, IImageData } from './types'
+import { IAppState, IImageData } from './types';
 import * as photos from './photos'
 
 async function initialize(state: IAppState) {
@@ -12,37 +12,34 @@ function insertElem(el: Node) {
   document.getElementById('img-list').appendChild(el)
 }
 
-function toggleLoading() {
+async function toggleLoading() {
   document.getElementById('loading-widget').classList.toggle('hidden')
 }
 
 async function cacheNextImages(state: IAppState, showLoading?: boolean) {
-  if (showLoading) toggleLoading()
+  if (showLoading) toggleLoading()      // show loading widget
   const nextPage = state.lastPage + 1
   await photos.getImages(nextPage)
     .then(data => {
-      if (showLoading) toggleLoading()
+      if (showLoading) toggleLoading()  // hide loading widget
       state.lastPage = nextPage
       state.imgCache = state.imgCache.concat(data.results)
     })
     .catch(err => {
-      console.log(err)
+      $('#logo').text('Please refresh the page.')
     })
 }
 
 async function renderFromCache(state: IAppState) {
-  toggleLoading()
   state.imgCache
     .splice(0, 12)
-    .map((imgData: IImageData) => photos.toElement(imgData))
-    .forEach((imgElem: Node) => insertElem(imgElem))
-  toggleLoading()
+    .forEach((imgData: IImageData) => insertElem(photos.toElement(imgData)))
 }
 
 async function loadMore() {
   /* TODO refactor to vanilla js */
   if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-    await renderFromCache(state)
+    renderFromCache(state)
     cacheNextImages(state)
   }
 }
@@ -52,7 +49,7 @@ async function loadMore() {
  */
 async function main() {
   initialize(state)
-  window.addEventListener('scroll', debounce(loadMore, 250, { trailing: true }))
+  window.addEventListener('scroll', debounce(loadMore, 250))
 }
 
 // Init state and start app
