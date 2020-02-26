@@ -50,7 +50,7 @@ async function loadMore() {
  */
 async function main() {
   initialize(state)
-  window.addEventListener('scroll', debounce(loadMore, 250))
+  window.addEventListener('scroll', debounce(loadMore, 200))
 }
 
 // Init state and start app
