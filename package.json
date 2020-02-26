@@ -1,6 +1,6 @@
 {
   "name": "eggsplash",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Unsplash but only egg photos",
   "main": "index.js",
   "scripts": {

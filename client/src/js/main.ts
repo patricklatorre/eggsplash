@@ -37,8 +37,9 @@ async function renderFromCache(state: IAppState) {
 }
 
 async function loadMore() {
-  /* TODO refactor to vanilla js */
-  if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+  console.log('called')
+  const loadingPoint = 1200
+  if ($(window).scrollTop() + loadingPoint >= $(document).height() - $(window).height()) {
     renderFromCache(state)
     cacheNextImages(state)
   }
@@ -49,7 +50,7 @@ async function loadMore() {
  */
 async function main() {
   initialize(state)
-  window.addEventListener('scroll', debounce(loadMore, 250))
+  window.addEventListener('scroll', debounce(loadMore, 200))
 }
 
 // Init state and start app
