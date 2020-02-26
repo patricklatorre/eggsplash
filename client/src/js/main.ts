@@ -37,7 +37,6 @@ async function renderFromCache(state: IAppState) {
 }
 
 async function loadMore() {
-  console.log('called')
   const loadingPoint = 1200
   if ($(window).scrollTop() + loadingPoint >= $(document).height() - $(window).height()) {
     renderFromCache(state)
