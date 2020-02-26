@@ -26,12 +26,11 @@ nav#navbar {
 
   & > div {
     width: 100%;
-    padding: 2rem 0;
+    padding: 1rem 0;
   }
 
   & h1 {
     width: 100%;
-    font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
     color: $text-gray-100;
     text-align: center;
   }
@@ -68,7 +67,7 @@ h4#loading-widget {
   padding-top: 6rem;
   color: $text-gray-800;
   text-align: center;
-  font-size: 2em;
+  font-size: 1.3em;
 }
 
 .hidden {
@@ -77,6 +76,16 @@ h4#loading-widget {
 
 /* Tablet and bigger */
 @media only screen and (min-width: 750px) {
+  nav#navbar {
+    & > div {
+      padding: 2rem 0;
+    }
+  }
+  
+  h4#loading-widget {
+    font-size: 2em;
+  }
+
   .img-grid {
     grid-template-columns: repeat(2, 1fr);
   }
