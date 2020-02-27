@@ -20,7 +20,7 @@ export const toElement = (data: any) => {
   el.setAttribute('src', data.src || '#')
   el.setAttribute('width', data.width as string || '400')
   el.setAttribute('height', data.height as string || '400')
-  el.setAttribute('alt_description', data.alt_description || 'eggs')
+  el.setAttribute('alt', data.alt_description || 'eggs')
   return el
 }
 
