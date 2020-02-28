@@ -1,4 +1,4 @@
-Super tiny blazing fast web app for serving egg photos. Go crazy.
+Demo app using [patricklatorre/typescript-starter](https://github.com/patricklatorre/typescript-starter).
 
 ---
 1. `git clone https://github.com/patricklatorre/eggsplash.git`
